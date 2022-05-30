@@ -1,0 +1,143 @@
+html,body{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: rgb(243, 243, 243);
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+
+}
+
+/** Sign Up / Login Page **/ 
+
+.signinpage--title, .signupform--title{
+  width: 70%;
+  margin: 0 auto;
+  text-align: left;
+  color:rgb(80, 155, 252);
+  text-align: center;
+}
+
+.signinpage--title2{
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+
+
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-align: center;
+  color:rgb(80, 155, 252);
+  
+}
+
+
+.signinform--container, .signupform--container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+}
+
+.signinform, .signupform{
+
+  max-width: 540px;
+  
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: auto auto;
+
+  background: #ffffff;
+  padding: 1rem;
+
+  border-radius: 30px;
+  
+}
+
+.signinform label, .signupform label{
+  width: 70%;
+  margin: 0  auto;
+  padding-left: .1rem;
+
+  text-align: left;
+  margin-bottom: .5rem;
+
+  color:rgb(80, 155, 252);
+  font-weight: 700;
+}
+
+.signinform--username,.signinform--password,.signupform--username,.signupform--password,.signupform--passwordconf{
+  width: 70%;
+  height: 30px;
+  margin: 0 auto;
+  margin-bottom: .5rem;
+  border: 1px solid black;
+}
+
+.signinform--username:invalid,.signinform--password:invalid,.signupform--passwordconf:invalid{
+  width: 70%;
+  height: 30px;
+  margin: 0 auto;
+  margin-bottom: .5rem;
+  border: 1px solid red;
+}
+
+.signinform--submitbutton, .signupform--submitbutton{
+  margin: 1rem auto;
+  border: none;
+  height: 50px;
+  background: rgb(80, 155, 252);
+  border: none;
+  border-radius: 10px;
+  width: 70%;
+  cursor: pointer;
+}
+
+.signinform--submitbutton p, .signupform--submitbutton p{
+  font-size: medium;
+  font-weight: 300;
+  color: white;
+}
+
+.signinform--signuplink, .signupform--signinlink{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signinform--signuplink a, .signupform--signinlink a{
+  text-decoration: underline;
+}
+
+/** Profile **/
+
+.welcomePrompt{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/** Error Stuff **/
+
+.error--UserPass{
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+/** Footer Stuff **/
+
+.footer{
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+}
+
