@@ -31,7 +31,8 @@ const SignUpForm = () => {
             .catch(function(error){
                 console.log(error);
                 if(error.response.data == "Username Taken"){
-                    document.getElementById("Username").setCustomValidity("Username Already Taken")
+                    document.getElementById("user").focus();
+                    document.getElementById("user").setCustomValidity("Username Already Taken")
                 }
             });
         }    

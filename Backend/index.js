@@ -7,7 +7,6 @@ const mongoose = require('mongoose')
 
 const User = require('./user');
 const {verifyToken} = require("./auth");
-const user = require('./user');
 require('dotenv').config()
 
 app = new express();
@@ -39,16 +38,14 @@ let blogPosts = [
 app.post('/signup', async(req, res) => {
     const username = req.body.user;
     const password = req.body.pass;
-
-    if(users.find((user)=>{
-        if(user.user == username){
-            return user;
-        }
-    })){
-        return res.status(400).send("Username Taken")
-    }
-
+    
     try {
+        const userExist = await User.find({username:username}).exec();
+        console.log(userExist);
+        if(userExist.length !== 0){
+            return res.status(400).send("Username Taken")
+        }
+
         hashedPass = await bcrypt.hash(password,10);
 
         //  Save to DB
@@ -56,8 +53,8 @@ app.post('/signup', async(req, res) => {
         await newUser.save();
         console.log(newUser);
 
-        users.push({id:users.length, user:username, pass:hashedPass});
     } catch (error) {
+        console.log(error);
         return res.status(500).send("Something went wrong");
     }
 
@@ -70,21 +67,26 @@ app.post('/login', async(req,res) => {
     
     const username = req.body.user;
     const password = req.body.pass;
-    const userInfo = users.find((person)=>{
-        if (person.user == username){
-            return person;
-        }
-    });
-
-    if(userInfo == null){
-        return res.status(400).send("Invalid Username/Password");
-    }
+     
 
     try {
-        const correctPass = await bcrypt.compare(password, userInfo.pass)
+        const userInfo = await User.find({username:username}).exec();
+        console.log(userInfo[0]);
+        if(userInfo.length == 0){
+            return res.status(400).send("Invalid Username/Password");
+        }
+
+        const correctPass = await bcrypt.compare(password, userInfo[0].password)
         if(!correctPass){
             return res.status(400).send("Invalid Username/Password");
         }
+
+        payload = {username:userInfo[0].username,password:userInfo[0].password}
+
+        const token = await jwt.sign(payload, process.env.TOKEN_SECRET);
+        console.log(token);
+        return res.status(200).json({'auth-token':token});
+
     } catch (error) {
         console.log(error)
         return res.status(500).send("Something went wrong")
@@ -92,9 +94,7 @@ app.post('/login', async(req,res) => {
     
     
 
-    jwt.sign(userInfo, process.env.TOKEN_SECRET, function(error,token){
-        return res.status(200).json({'auth-token':token});
-    });
+    
 })
 
 app.get('/posts',function(req,res){
