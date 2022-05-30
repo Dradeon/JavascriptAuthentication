@@ -7,6 +7,7 @@ import { Profiler, useEffect, useState } from 'react';
 
 const Profile = () => {
   const Router = useRouter();
+  const [user,setUser] = useState(null);
   const [posts,setPosts] = useState(null);
   const [isLoading,setLoading] = useState(false);
 
@@ -18,9 +19,10 @@ const Profile = () => {
       }
     })
     .then((res)=>{
-      console.log(res);
-      const info = res.data.blogPosts;
+      const info = res.data;
       setPosts(info);
+      setUser(res.headers['username']);
+      console.log(user);
       setLoading(false);
     }).catch((error) => {
       console.log(error)
@@ -49,12 +51,14 @@ const Profile = () => {
         <title>Profile</title>
         <meta name = "viewport" content = "intial-scale=1.0, width=device-width"></meta>
       </Head>
-      <h1 className = "welcomePrompt">Hello User!</h1>
+      <h1 className = "welcomePrompt">Hello {user}!</h1>
       <h3>Your Timeline</h3>
       <div className="Timeline">
           {posts.map((post)=>{
             return <div key = {post.id}>
-              <h1>{post.title}</h1>
+              <h1>{post.Title}</h1>
+              <h2>{post.DateCreated}</h2>
+              <p>{post.Content}</p>
             </div>
           })}
       </div>

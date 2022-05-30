@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
-const User = require('./user');
+const Blog = require('./schemas/blogs');
+const User = require('./schemas/user');
 const {verifyToken} = require("./auth");
 require('dotenv').config()
 
@@ -18,7 +19,6 @@ mongoose.connect(`mongodb+srv://RezaCluster:${process.env.DB_PASS}@cluster0.wdvh
     console.log("Connected to Database");
 })
 
-let users = [{id: 0, user:"User123", pass: "Pass123"}]
 
 let blogPosts = [
     {
@@ -97,15 +97,21 @@ app.post('/login', async(req,res) => {
     
 })
 
-app.get('/posts',function(req,res){
-
-    if(verifyToken(req,res) == false){
+app.get('/posts', async function(req,res){
+    const user = verifyToken(req,res);
+    if(user == false){
         return res.status(400).send("Login Needed")
     }
-    
-    console.log("Getting Posts");
-    return res.status(200).json({blogPosts});
-
+    try {
+        console.log("Getting Posts");
+        const blogPosts = await Blog.find().exec();
+        console.log(blogPosts);
+        res.header('Username',user.username);
+        res.header('Access-Control-Expose-Headers','Username');
+        return res.status(200).send(blogPosts);
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 app.listen(8080, ()=>{

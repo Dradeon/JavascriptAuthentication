@@ -7,8 +7,7 @@ function verifyToken(req,res) {
     }
     try{
         decoded = verify(accessheader,process.env.TOKEN_SECRET);
-        console.log(decoded);
-        return true;
+        return decoded;
     }
     catch(err){
         console.log(err)
