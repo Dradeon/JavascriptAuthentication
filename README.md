@@ -10,6 +10,7 @@ This is a NextJS application that allows a user to login or register for an acco
 
 ## Technologies
 This project was made using:
+* NextJS
 * NodeJS
 * Express
 * JSON Web Token
