@@ -4,7 +4,10 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+
+const User = require('./user');
 const {verifyToken} = require("./auth");
+const user = require('./user');
 require('dotenv').config()
 
 app = new express();
@@ -47,6 +50,12 @@ app.post('/signup', async(req, res) => {
 
     try {
         hashedPass = await bcrypt.hash(password,10);
+
+        //  Save to DB
+        const newUser = new User({username:username,password:hashedPass});
+        await newUser.save();
+        console.log(newUser);
+
         users.push({id:users.length, user:username, pass:hashedPass});
     } catch (error) {
         return res.status(500).send("Something went wrong");
