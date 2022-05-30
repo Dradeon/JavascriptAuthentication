@@ -1,12 +1,12 @@
 # JavascriptAuthentication
-This project uses JSON Web Token to verify and login a user into an application. Their will stored on a database using MongoDB.
-
-## Tables of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Setup](#setup)
 
 ## General Info
+This is a NextJS application that allows a user to login or register for an account via NodeJS and MongoDB. The application uses JSON web token to determine whether or not the user is logged in.
+
+## Features
+* Register/Login to an account
+* Utilize BCrypt to hash password
+* Stores the username and hashed password on a database such as MongoDB
 
 ## Technologies
 This project was made using:
