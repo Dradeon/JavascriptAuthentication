@@ -16,7 +16,7 @@ export default function Home({users}) {
 
   if(typeof window !== "undefined"){
     if(window.localStorage.getItem('auth-token') !== null){
-      return <Profile posts = {users}></Profile>
+      return <Profile />
     }
   }
   

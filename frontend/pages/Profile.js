@@ -35,34 +35,38 @@ const Profile = () => {
 
   const handleLogout = (event) => {
     event.preventDefault();
-    localStorage.removeItem('auth-token')
-    Router.push('/')
+    localStorage.removeItem('auth-token');
+    Router.push('/');
   }
 
   if(isLoading){
     return <div>Is Loading</div>
   }
   if(!posts){
-    return <div>No Data</div>
+    return <div>No Posts currently in the Database</div>
   }
 
   return <div>
       <Head>
-        <title>Profile</title>
+        <title>Your Blog List</title>
         <meta name = "viewport" content = "intial-scale=1.0, width=device-width"></meta>
       </Head>
       <h1 className = "welcomePrompt">Hello {user}!</h1>
-      <h3>Your Timeline</h3>
+      <h3 className='Title-NewBlogs'>New Blogs:</h3>
       <div className="Timeline">
           {posts.map((post)=>{
-            return <div key = {post.id}>
+            return <div key = {post.id} className = "Card-Article">
               <h1>{post.Title}</h1>
-              <h2>{post.DateCreated}</h2>
+              <h2>{new Date(post.DateCreated).toLocaleDateString()}</h2>
               <p>{post.Content}</p>
             </div>
           })}
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      <button className='Button-Logout' onClick={handleLogout}><p>Logout</p></button>
+      <footer className='Footer-Blog'>
+        <p>By Bakhtiar Reza </p>
+        <a href = "https://github.com/Dradeon/JavascriptAuthentication" target="_blank">View Source Code</a>
+      </footer>
     </div>;
 };
 

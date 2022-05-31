@@ -1,6 +1,6 @@
 html,body{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: rgb(243, 243, 243);
+  background: #ecf0f1;
 }
 
 
@@ -54,7 +54,7 @@ a {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin: auto auto;
+  margin: 2rem auto;
 
   background: #ffffff;
   padding: 1rem;
@@ -117,19 +117,16 @@ a {
   text-decoration: underline;
 }
 
-/** Profile **/
-
-.welcomePrompt{
-  font-size: 2rem;
-  font-weight: bold;
-}
-
 /** Error Stuff **/
 
 .error--UserPass{
   text-align: center;
   color: red;
   font-weight: bold;
+}
+
+.Error-Token{
+  text-align: center;
 }
 
 /** Footer Stuff **/
@@ -141,3 +138,72 @@ a {
   bottom: 0;
 }
 
+/** Profile **/
+
+.welcomePrompt{
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin: 1rem .75rem;
+
+}
+
+.Title-NewBlogs{
+  font-size: 2rem;
+  font-weight: bold;
+  
+  margin: 0rem .75rem;
+  text-decoration: underline;
+}
+
+.Card-Article{
+  background-color: #ffffff;
+
+  border-radius: 1rem;
+  border-bottom: 2px solid lightgrey;
+  box-shadow: 0px 0px.5rem rgb(139, 139, 139);
+  margin: 1rem .75rem;
+  padding: .5rem 1rem;
+}
+
+.Card-Article h1{
+  margin-bottom: -.5rem;
+  color: rgb(80, 155, 252);
+}
+
+.Card-Article h2{
+  font-size: 1rem;
+  font-weight: 400;
+  
+}
+
+.Button-Logout{
+  display: flex;
+  justify-content: center;
+
+  width: 8rem;
+  margin: 5rem auto;
+  border: none;
+  height: 50px;
+  background: rgb(80, 155, 252);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.Button-Logout p{
+  font-size: medium;
+  font-weight: 300;
+  color: white;
+}
+
+.Footer-Blog{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  font-size: 1rem;
+}
+
+.Footer-Blog a{
+  margin: -.75rem 0rem;
+}

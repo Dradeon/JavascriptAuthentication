@@ -1,11 +1,21 @@
 import axios from 'axios';
 import Head from 'next/head'
 import { Router, useRouter } from 'next/router'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SignInForm = () => {
     const [invalidUserPass,setInvalidUserPass] = useState(false);
+    const [expiredToken, setExpiredToken] = useState(false);
     const router = useRouter();
+
+    useEffect(()=>{
+        if(typeof window !== "undefined"){
+            if(window.localStorage.getItem('auth-token') !== null){
+              setExpiredToken(true);
+            }
+          }
+    });
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -26,7 +36,6 @@ const SignInForm = () => {
         .catch((error) => {
             console.log(error);
             if(error.response.data == "Invalid Username/Password"){
-                setInvalidUserPass(true);
                 document.getElementById("Username").setCustomValidity("Username or Password is Wrong");
                 document.getElementById("Password").setCustomValidity("Username or Password is Wrong");
             }
@@ -51,6 +60,7 @@ const SignInForm = () => {
                     <button type = 'submit' className = 'signinform--submitbutton'><p>Submit</p></button>
                     <p className='signinform--signuplink'><small>Don't Have An Account? <a href = "SignUpForm" className=''>Sign Up</a></small></p>
                 </form>
+                {expiredToken ? <div className='Error-Token'>Token is Expired/Not Valid. Please Login</div> : <></>}
             </div>
             <footer className='footer'>
                 <p><small>Copyright © Reza 2022</small></p>

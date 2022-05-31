@@ -19,22 +19,6 @@ mongoose.connect(`mongodb+srv://RezaCluster:${process.env.DB_PASS}@cluster0.wdvh
     console.log("Connected to Database");
 })
 
-
-let blogPosts = [
-    {
-        id: 1,
-        title: "Title 1"
-    },
-    {
-        id: 2,
-        title: "Title 2"
-    },
-    {
-        id: 3,
-        title: "Title 3"
-    }
-];
-
 app.post('/signup', async(req, res) => {
     const username = req.body.user;
     const password = req.body.pass;
@@ -53,14 +37,12 @@ app.post('/signup', async(req, res) => {
         await newUser.save();
         console.log(newUser);
 
+        return res.status(200).send("User Created")
+
     } catch (error) {
         console.log(error);
         return res.status(500).send("Something went wrong");
-    }
-
-    
-    console.log(users)
-    return res.status(200).send("User Created")
+    } 
 });
 
 app.post('/login', async(req,res) => {
@@ -84,7 +66,6 @@ app.post('/login', async(req,res) => {
         payload = {username:userInfo[0].username,password:userInfo[0].password}
 
         const token = await jwt.sign(payload, process.env.TOKEN_SECRET);
-        console.log(token);
         return res.status(200).json({'auth-token':token});
 
     } catch (error) {
