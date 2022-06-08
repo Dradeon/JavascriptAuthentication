@@ -15,7 +15,7 @@ app = new express();
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect(`mongodb+srv://RezaCluster:${process.env.DB_PASS}@cluster0.wdvhzsk.mongodb.net/?retryWrites=true&w=majority`, ()=>{
+mongoose.connect(process.env.URL, ()=>{
     console.log("Connected to Database");
 })
 
